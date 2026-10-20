@@ -1,7 +1,7 @@
 {
-  "versionCode": 36,
-  "versionName": "1.0.3",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.0.3/nodopin.apk",
-  "sha256": "0a4625c90bbd5968c9911c4ec7bbda95bff2b7eddc5dcc81c76653e6fa3317f1",
-  "changelog": "Actualizador Compose con descarga persistente, recordatorios de instalación, distintivos verificados y repositorio independiente de NodoPin."
+  "versionCode": 37,
+  "versionName": "1.0.4",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.0.4/nodopin.apk",
+  "sha256": "d83acd9c2e769c57adb47842cde1f8cff57daf5ac85c7acf2cf16acd912a8e38",
+  "changelog": "Mejoras en NFC y tarjetas de contacto QR, enlaces de descarga oficiales, actualización segura desde GitHub y compatibilidad con perfiles de NodoPin."
 }
