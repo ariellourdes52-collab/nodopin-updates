@@ -1,7 +1,7 @@
 {
-  "versionCode": 37,
-  "versionName": "1.0.4",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.0.4/nodopin.apk",
-  "sha256": "d83acd9c2e769c57adb47842cde1f8cff57daf5ac85c7acf2cf16acd912a8e38",
-  "changelog": "Mejoras en NFC y tarjetas de contacto QR, enlaces de descarga oficiales, actualización segura desde GitHub y compatibilidad con perfiles de NodoPin."
+  "versionCode": 38,
+  "versionName": "1.0.5",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.0.5/nodopin.apk",
+  "sha256": "ed3696a4e66eb26930dfe0d93968a9df8f846f3eeaa2085704e6f7e177dd7be6",
+  "changelog": "Enlaces cortos para compartir contactos por WhatsApp, QR y NFC; tarjeta de perfil renovada y mejoras de compatibilidad."
 }
