@@ -1,7 +1,7 @@
 {
-  "versionCode": 40,
-  "versionName": "1.0.7",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.0.7/nodopin.apk",
-  "sha256": "59db3e17ea88ac02929c0caf2e31fa0d1a30eca00c4bbe7e1d954fb83b54c2b6",
-  "changelog": "Corrección urgente de la conexión de datos intermitente; mejoras de estabilidad y recuperación de sincronización, conservando /v3/sync optimizado."
+  "versionCode": 41,
+  "versionName": "1.0.8",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.0.8/nodopin.apk",
+  "sha256": "617159008470b7820939bf1345d1fbd714b7d8424c503c77b0f350f3aef7d632",
+  "changelog": "Nueva tarjeta inicial para nombre y foto de perfil; recuperación de chats más clara y automática cuando existen las claves; navegación de perfil corregida para mostrar la cabecera desde arriba."
 }
