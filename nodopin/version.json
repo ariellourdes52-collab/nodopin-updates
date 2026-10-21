@@ -1,7 +1,7 @@
 {
-  "versionCode": 41,
-  "versionName": "1.0.8",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.0.8/nodopin.apk",
-  "sha256": "617159008470b7820939bf1345d1fbd714b7d8424c503c77b0f350f3aef7d632",
-  "changelog": "Nueva tarjeta inicial para nombre y foto de perfil; recuperación de chats más clara y automática cuando existen las claves; navegación de perfil corregida para mostrar la cabecera desde arriba."
+  "versionCode": 42,
+  "versionName": "1.0.9",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.0.9/nodopin.apk",
+  "sha256": "f52985a6e89b178163f201e1ff6ff64f6cd2719a4360e11b866abdab26ce52d8",
+  "changelog": "Mejoras de detección Bluetooth: limpieza automática de señales antiguas después de 60 segundos; contador más preciso; distinción entre dispositivos Bluetooth compatibles y usuarios NodoPin identificados; se conservan conexiones activas, cifrado, mensajes y datos."
 }
