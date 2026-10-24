@@ -1,7 +1,7 @@
 {
-  "versionCode": 42,
-  "versionName": "1.0.9",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.0.9/nodopin.apk",
-  "sha256": "f52985a6e89b178163f201e1ff6ff64f6cd2719a4360e11b866abdab26ce52d8",
-  "changelog": "Mejoras de detección Bluetooth: limpieza automática de señales antiguas después de 60 segundos; contador más preciso; distinción entre dispositivos Bluetooth compatibles y usuarios NodoPin identificados; se conservan conexiones activas, cifrado, mensajes y datos."
+  "versionCode": 43,
+  "versionName": "1.1.0",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.1.0/nodopin.apk",
+  "sha256": "56d5d23dac36befae6278d83188bab9cdd5b26ed8e9764a4d38aa5c8acb49d8f",
+  "changelog": "Nueva capa de seguridad privada opcional con PIN, contraseña y biometría; Forward Secrecy mediante Double Ratchet en sesiones E2EE compatibles; mejoras de recuperación y respaldos cifrados; Chats y Contactos separados; emojis ampliados, mayúsculas automáticas, fondo AMOLED y correcciones de estabilidad."
 }
