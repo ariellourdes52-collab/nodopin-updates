@@ -1,7 +1,7 @@
 {
-  "versionCode": 44,
-  "versionName": "1.2.0",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.2.0/nodopin.apk",
-  "sha256": "ef6df3650d91b0d4b81f8f1d1c3de60c432ea28810c2d87e064b9297fd5cac96",
-  "changelog": "Responder a mensajes con cita y vista previa; selector de emojis corregido para mantener visible el texto; conservación de imágenes y notas de voz; corrección de iconos Reply obsoletos; compatibilidad con las protecciones antiabuso activas en Cloudflare; mejoras de estabilidad y consultas de claves E2EE."
+  "versionCode": 46,
+  "versionName": "1.3.1",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.3.1/nodopin.apk",
+  "sha256": "1d2eb21cfa8192ba66cf8d959aee4c896011f38a8dd217b43c8f0816bc7cde25",
+  "changelog": "Red mesh BLE optimizada con ampliación hasta 5 saltos entre equipos compatibles; mejoras de descubrimiento y recuperación de conexiones, Wi-Fi Direct y SOS; reconciliación de contactos con backend compatible; correcciones de estabilidad y mantenimiento del cifrado E2EE."
 }
