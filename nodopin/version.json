@@ -1,7 +1,7 @@
 {
-  "versionCode": 43,
-  "versionName": "1.1.0",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.1.0/nodopin.apk",
-  "sha256": "56d5d23dac36befae6278d83188bab9cdd5b26ed8e9764a4d38aa5c8acb49d8f",
-  "changelog": "Nueva capa de seguridad privada opcional con PIN, contraseña y biometría; Forward Secrecy mediante Double Ratchet en sesiones E2EE compatibles; mejoras de recuperación y respaldos cifrados; Chats y Contactos separados; emojis ampliados, mayúsculas automáticas, fondo AMOLED y correcciones de estabilidad."
+  "versionCode": 44,
+  "versionName": "1.2.0",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.2.0/nodopin.apk",
+  "sha256": "ef6df3650d91b0d4b81f8f1d1c3de60c432ea28810c2d87e064b9297fd5cac96",
+  "changelog": "Responder a mensajes con cita y vista previa; selector de emojis corregido para mantener visible el texto; conservación de imágenes y notas de voz; corrección de iconos Reply obsoletos; compatibilidad con las protecciones antiabuso activas en Cloudflare; mejoras de estabilidad y consultas de claves E2EE."
 }
