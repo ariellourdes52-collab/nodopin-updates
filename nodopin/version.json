@@ -1,7 +1,7 @@
 {
-  "versionCode": 47,
-  "versionName": "1.3.2",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/nodopin-v1.3.2/nodopin.apk",
-  "sha256": "c281dc590c4731361e7e5ae730d3df582b10d704f861bb3e6fd69c168f8202d2",
-  "changelog": "NOD!: señal sonora y vibratoria especial para llamar la atención desde los chats, con botón y comando *nod*, visualización NOD!!! en rojo, sonido original, vibración directa y volumen de alarmas; mejoras de estabilidad y compatibilidad con mensajes cifrados por Internet y conexiones locales."
+  "versionCode": 48,
+  "versionName": "1.3.3",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.3.3/nodopin.apk",
+  "sha256": "03bb7be4d6d75a15d4f7efee46b76197b7e1d55cacac99056a73448fba760b30",
+  "changelog": "Notificaciones con nombre, vista previa y foto de contacto según privacidad; navegación al mensaje original en respuestas citadas; conversación y posición de lectura conservadas al girar el teléfono; prevención de avisos duplicados; compatibilidad con Android 17 (SDK 37) y permiso de red local."
 }
