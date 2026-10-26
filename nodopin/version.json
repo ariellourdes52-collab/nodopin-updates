@@ -1,7 +1,7 @@
 {
-  "versionCode": 50,
-  "versionName": "1.3.5",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.3.5/nodopin.apk",
-  "sha256": "83a74994812dba632425a42ce5f0e1d71c7686f8b26d50f3d7cb9681aa9be2ff",
-  "changelog": "Centro DR con Radar general, avisos sísmicos y DR Agenda; alertas FCM, accesos duplicados retirados de SOS y Ajustes y respuestas citadas ahora visibles sobre el editor del chat."
+  "versionCode": 51,
+  "versionName": "1.3.6",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.3.6/nodopin.apk",
+  "sha256": "cb2cd459040b1b2db324e03e4317765db0241b0474086451eb97b8274f48283a",
+  "changelog": "Sirena sísmica exclusiva; notificaciones al chat correcto; copiar textos; enlaces pulsables y vistas previas privadas; mejoras de compatibilidad Android 17."
 }
