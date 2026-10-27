@@ -1,7 +1,7 @@
 {
-  "versionCode": 51,
-  "versionName": "1.3.6",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.3.6/nodopin.apk",
-  "sha256": "cb2cd459040b1b2db324e03e4317765db0241b0474086451eb97b8274f48283a",
-  "changelog": "Sirena sísmica exclusiva; notificaciones al chat correcto; copiar textos; enlaces pulsables y vistas previas privadas; mejoras de compatibilidad Android 17."
+  "versionCode": 52,
+  "versionName": "1.3.7",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.3.7/nodopin.apk",
+  "sha256": "8ca2ae4718cc3c089175371e5b0e5240102c31298129599af2eebdb164daf236",
+  "changelog": "Seguridad E2EE reforzada; Firebase App Check con Play Integrity; respaldo y restauración confiables; indicador de cifrado compacto; mejoras de Centro DR y notificaciones."
 }
