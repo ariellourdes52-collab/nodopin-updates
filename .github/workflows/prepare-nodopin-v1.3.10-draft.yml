@@ -1,0 +1,36 @@
+name: NodoPin — crear borrador GitHub v1.3.10
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v1.3.10.md'
+      - '.github/workflows/prepare-nodopin-v1.3.10-draft.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Crear borrador, sin publicación ni actualizador
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v1.3.10 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "La release v1.3.10 ya existe; no se sobreescribe."
+            exit 0
+          fi
+          gh release create v1.3.10 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target main \
+            --draft \
+            --title "🔐 NodoPin v1.3.10 (55) — Cierre de grupos para todos y limpieza del servidor" \
+            --notes-file releases/v1.3.10.md
+          echo "Borrador creado: adjuntar nodopin.apk y publicar solo cuando esté listo."
