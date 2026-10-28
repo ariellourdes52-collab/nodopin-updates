@@ -14,7 +14,7 @@
 - **Conectar fácilmente:** agrega contactos mediante PIN, tarjeta de perfil, códigos QR y NFC.
 - **Recuperar tus chats:** copias cifradas NPBK2 en una carpeta elegida del dispositivo o de un proveedor compatible con Android; clave de recuperación propia y copias automáticas programadas.
 - **Comenzar sin Google:** el registro local permite iniciar sin Internet; la vinculación de Google es opcional.
-- **Usar SOS y Centro DR:** funciones de emergencia, DR Radar, alertas sísmicas y DR Agenda.
+- **Actuar rápido con SOS:** activación con un botón y atajos desde Home y la barra; aviso con ubicación cuando está disponible, y favoritos de emergencia. Centro DR integra DR Radar, alertas sísmicas y DR Agenda.
 - **Personalizar tu privacidad:** foto, estado, controles de notificaciones, bloqueo de contactos y Private Vault opcional.
 
 ## Última versión preparada
