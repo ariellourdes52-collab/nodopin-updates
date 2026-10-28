@@ -44,8 +44,15 @@ NodoPin es una aplicación de mensajería privada para Android que combina **con
 - En **Mi tarjeta** y en la tarjeta compartida se unifica el texto **«Cuenta verificada por NodoPin»** cuando se muestra la verificación.
 - Mejoras de enlaces, ubicación en mapas y controles habituales de chats, incluyendo silenciar y bloquear contactos.
 
-### 🚨 SOS, Centro DR y comunicación híbrida
-- Se conservan **SOS**, contactos de emergencia, favoritos, ubicación y las rutas de comunicación disponibles.
+### 🚨 SOS más rápido y completo
+- **Activación de SOS con un solo botón:** acceso inmediato desde el control de emergencia, sin tener que recorrer varios menús.
+- **Mensaje SOS con ubicación:** el aviso de emergencia incluye la ubicación del usuario cuando está disponible y se han otorgado los permisos necesarios.
+- **Contactos favoritos para SOS:** permite organizar los contactos prioritarios de emergencia y acceder a ellos más fácilmente.
+- **Atajo SOS en la barra:** acceso directo a la función de emergencia desde la barra de accesos de la aplicación.
+- **Atajo SOS en Home:** botón visible desde la pantalla principal para actuar con rapidez.
+- Se conservan las rutas de comunicación disponibles según la conexión y compatibilidad del dispositivo.
+
+### 🌎 Centro DR y comunicación híbrida
 - **Centro DR** integra **DR Radar** (incluidas alertas sísmicas y su sonido diferenciado) y **DR Agenda**, con acceso a eventos y funciones de calendario compatibles.
 - Mensajes por **Internet**, enlaces **Bluetooth y Wi-Fi Direct**, y retransmisión **mesh multisalto** en condiciones compatibles.
 - Notificaciones por canales diferenciados, alertas de mensajes y controles de privacidad disponibles en Android.
