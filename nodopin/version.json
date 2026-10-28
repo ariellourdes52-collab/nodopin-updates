@@ -1,7 +1,7 @@
 {
-  "versionCode": 53,
-  "versionName": "1.3.8",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.3.8/nodopin.apk",
-  "sha256": "8ea415e91a690dfd9366ebfe50d1fa200a7e4b1288a618e8bf07d25f56662f0f",
-  "changelog": "Ubicación con mapas dentro de NodoPin; ubicación en vivo más clara y notificaciones menos repetitivas; sonidos diferenciados de DR Radar y alertas sísmicas; ajustes de estabilidad y cifrado."
+  "versionCode": 54,
+  "versionName": "1.3.9",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.3.9/nodopin.apk",
+  "sha256": "32bcf1f9ce906aa114697aca38f851cefa84e84368811937404ed7b0f9da323a",
+  "changelog": "SOS con un botón, ubicación en alertas y contactos favoritos; atajos SOS en Inicio y barra. Grupos premium con invitaciones, administración de integrantes, fotos HD, voz, adjuntos y mapas. Copias cifradas NPBK2 con clave de recuperación, almacenamiento local o Drive, Wi-Fi y datos móviles. Mejoras de identidad E2EE, registro offline, experiencia inicial, perfiles, avisos y rendimiento."
 }
