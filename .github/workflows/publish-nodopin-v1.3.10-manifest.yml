@@ -71,16 +71,37 @@ jobs:
           p.write_text(json.dumps(current, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
           PY
 
+      - name: Actualizar portada del repositorio tras validar APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('README.md')
+          s = p.read_text(encoding='utf-8')
+          old_version = '**v1.3.9 (54)** — grupos premium, recuperación NPBK2, mejor continuidad de identidad E2EE y una primera experiencia más intuitiva.'
+          new_version = '**v1.3.10 (55)** — cierre de grupos para todos con órdenes cifradas y limpieza de multimedia grupal identificada en Cloudflare D1/B2.'
+          old_link = '[Leer todas las novedades de v1.3.9](RELEASE_NOTES_v1.3.9.md)'
+          new_link = '[Leer todas las novedades de v1.3.10](RELEASE_NOTES_v1.3.10.md)'
+          if new_version in s and new_link in s:
+              print('README ya actualizado.')
+          elif old_version in s and old_link in s:
+              s = s.replace(old_version, new_version).replace(old_link, new_link)
+              p.write_text(s, encoding='utf-8')
+          else:
+              raise SystemExit('README cambió: no sobrescribir referencias de versión sin revisión.')
+          PY
+
       - name: Publicar nodopin/version.json cuando el APK ya es accesible
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- nodopin/version.json; then
+          if git diff --quiet -- nodopin/version.json README.md; then
             echo "El manifiesto ya coincide con el APK verificado."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- nodopin/version.json
+          git add -- nodopin/version.json README.md
           git commit -m "release(nodopin): publicar manifiesto APK verificado v1.3.10 (55)"
           git push origin HEAD:main
