@@ -1,7 +1,7 @@
 {
-  "versionCode": 54,
-  "versionName": "1.3.9",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.3.9/nodopin.apk",
-  "sha256": "32bcf1f9ce906aa114697aca38f851cefa84e84368811937404ed7b0f9da323a",
-  "changelog": "SOS con un botón, ubicación en alertas y contactos favoritos; atajos SOS en Inicio y barra. Grupos premium con invitaciones, administración de integrantes, fotos HD, voz, adjuntos y mapas. Copias cifradas NPBK2 con clave de recuperación, almacenamiento local o Drive, Wi-Fi y datos móviles. Mejoras de identidad E2EE, registro offline, experiencia inicial, perfiles, avisos y rendimiento."
+  "versionCode": 55,
+  "versionName": "1.3.10",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.3.10/nodopin.apk",
+  "sha256": "0dc79ad62f14e1a587ebbd4db2cf40295ca0d6e6bac07651055334befcabe4c6",
+  "changelog": "El creador puede eliminar un grupo para todos mediante órdenes cifradas. Limpieza de multimedia identificada en Cloudflare D1 y caducidad de videos grupales en B2; reintento para integrantes desconectados. Se conservan los chats privados, la copia NPBK2 y los transportes Internet/Bluetooth/Wi-Fi Direct."
 }

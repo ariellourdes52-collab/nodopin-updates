@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.3.9 (54)** — grupos premium, recuperación NPBK2, mejor continuidad de identidad E2EE y una primera experiencia más intuitiva.
+**v1.3.10 (55)** — cierre de grupos para todos con órdenes cifradas y limpieza de multimedia grupal identificada en Cloudflare D1/B2.
 
-📋 [Leer todas las novedades de v1.3.9](RELEASE_NOTES_v1.3.9.md)
+📋 [Leer todas las novedades de v1.3.10](RELEASE_NOTES_v1.3.10.md)
 
 ## Instalación y actualización
 
