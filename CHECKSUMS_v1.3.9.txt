@@ -1,0 +1,3 @@
+# NodoPin v1.3.9 (versionCode 54)
+# SHA-256 del APK oficial inspeccionado
+32bcf1f9ce906aa114697aca38f851cefa84e84368811937404ed7b0f9da323a  nodopin.apk
