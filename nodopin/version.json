@@ -1,7 +1,7 @@
 {
-  "versionCode": 58,
-  "versionName": "1.4.2",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.2/nodopin.apk",
-  "sha256": "6bb3a268d3e2ea48cfcaa9660e2d9ded3e2bf7bc4d75a3ab20d87909778061ef",
-  "changelog": "Política de privacidad premium en Android, mejoras de preclaves E2EE para usuarios con y sin Google, intercambio inicial por Wi-Fi Direct y BLE y corrección de warnings de interfaz."
+  "versionCode": 59,
+  "versionName": "1.4.3",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.3/nodopin.apk",
+  "sha256": "35f046c2a87ce9ddc81a1fcafe683a7d45de4aae6459ca8d87b7e91735545a5a",
+  "changelog": "Mensajes y confirmaciones D más fiables en segundo plano; recuperación de sincronización FCM para usuarios con Google y sin Google, sin cambios en la interfaz."
 }

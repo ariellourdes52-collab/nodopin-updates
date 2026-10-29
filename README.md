@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.4.2 (58)** — política de privacidad premium, preclaves E2EE para usuarios con y sin Google, intercambio inicial local mediante Wi-Fi Direct y BLE, y pulido de interfaz. Pruebas físicas completas recomendadas.
+**v1.4.3 (59)** — mejoras de entrega FCM en segundo plano para usuarios con Google y sin Google, recuperación de mensajes y acuses D, sin cambios en la interfaz.
 
-📋 [Leer todas las novedades de v1.4.2](RELEASE_NOTES_v1.4.2.md)
+📋 [Leer todas las novedades de v1.4.3](RELEASE_NOTES_v1.4.3.md)
 
 ## Instalación y actualización
 
