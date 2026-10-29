@@ -1,0 +1,36 @@
+name: NodoPin — preparar borrador GitHub v1.4.3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v1.4.3.md'
+      - '.github/workflows/prepare-nodopin-v1.4.3-draft.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Crear release en borrador para adjuntar APK
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v1.4.3 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "La release v1.4.3 ya existe: no se reemplaza."
+            exit 0
+          fi
+          gh release create v1.4.3 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target main \
+            --draft \
+            --title '📬 NodoPin v1.4.3 (59) — Mensajes y confirmaciones más fiables' \
+            --notes-file releases/v1.4.3.md
+          echo 'Borrador preparado. Adjuntar nodopin.apk; publicar al terminar.'
