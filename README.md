@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.4.0 (56)** — alertas SOS y sísmicas que se silencian al atenderlas, tarjeta SOS con mapa y ubicación precisa estimada, instrucciones intuitivas y fotos circulares en notificaciones.
+**v1.4.1 (57)** — guías de la sección SOS expandibles, contraídas por defecto y con diseño premium. Se conservan intactas las tarjetas de los chats y el envío SOS.
 
-📋 [Leer todas las novedades de v1.4.0](RELEASE_NOTES_v1.4.0.md)
+📋 [Leer todas las novedades de v1.4.1](RELEASE_NOTES_v1.4.1.md)
 
 ## Instalación y actualización
 

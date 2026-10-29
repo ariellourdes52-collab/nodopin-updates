@@ -1,7 +1,7 @@
 {
-  "versionCode": 56,
-  "versionName": "1.4.0",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.0/nodopin.apk",
-  "sha256": "1dc173a2f1ef0f5e8c0fbc860262eec412e5744bc3be80ee91acf83534d95548",
-  "changelog": "NodoPIN SOS: mapa integrado, precisión GPS estimada y guía de uso; acceso desde Ajustes rápidos. Las alarmas SOS y sísmicas se detienen al abrir la app o el chat correspondiente. Fotos circulares en las notificaciones y nombre NodoPIN SOS; compatibilidad preservada."
+  "versionCode": 57,
+  "versionName": "1.4.1",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.1/nodopin.apk",
+  "sha256": "a4abff4c6ee50bbaf18c4fc1fcc8f00a593a23846ec037e7d583f910db0ecc45",
+  "changelog": "Sección NodoPIN SOS: los dos paneles de instrucciones —cómo funciona SOS y acceso desde la barra— son expandibles, contraídos por defecto y con un diseño premium. No se cambian tarjetas del chat ni el funcionamiento de emergencias."
 }
