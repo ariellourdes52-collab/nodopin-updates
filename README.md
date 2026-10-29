@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.4.1 (57)** — guías de la sección SOS expandibles, contraídas por defecto y con diseño premium. Se conservan intactas las tarjetas de los chats y el envío SOS.
+**v1.4.2 (58)** — política de privacidad premium, preclaves E2EE para usuarios con y sin Google, intercambio inicial local mediante Wi-Fi Direct y BLE, y pulido de interfaz. Pruebas físicas completas recomendadas.
 
-📋 [Leer todas las novedades de v1.4.1](RELEASE_NOTES_v1.4.1.md)
+📋 [Leer todas las novedades de v1.4.2](RELEASE_NOTES_v1.4.2.md)
 
 ## Instalación y actualización
 
