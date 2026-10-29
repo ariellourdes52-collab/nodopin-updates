@@ -1,0 +1,36 @@
+name: NodoPIN — preparar borrador GitHub v1.4.2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v1.4.2.md'
+      - '.github/workflows/prepare-nodopin-v1.4.2-draft.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Crear borrador sin activar actualizaciones
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v1.4.2 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'La release v1.4.2 ya existe; no se modifica.'
+            exit 0
+          fi
+          gh release create v1.4.2 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target main \
+            --draft \
+            --title '🔐 NodoPIN v1.4.2 (58) — Privacidad y sesiones cifradas' \
+            --notes-file releases/v1.4.2.md
+          echo 'Borrador creado: adjuntar nodopin.apk, comprobar SHA y publicar.'
