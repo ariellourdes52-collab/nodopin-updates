@@ -1,0 +1,3 @@
+# NodoPIN v1.4.1 (57) — archivo APK oficial
+# SHA-256 verificado de la compilación entregada
+a4abff4c6ee50bbaf18c4fc1fcc8f00a593a23846ec037e7d583f910db0ecc45  nodopin.apk
