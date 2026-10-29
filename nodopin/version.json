@@ -1,7 +1,7 @@
 {
-  "versionCode": 57,
-  "versionName": "1.4.1",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.1/nodopin.apk",
-  "sha256": "a4abff4c6ee50bbaf18c4fc1fcc8f00a593a23846ec037e7d583f910db0ecc45",
-  "changelog": "Sección NodoPIN SOS: los dos paneles de instrucciones —cómo funciona SOS y acceso desde la barra— son expandibles, contraídos por defecto y con un diseño premium. No se cambian tarjetas del chat ni el funcionamiento de emergencias."
+  "versionCode": 58,
+  "versionName": "1.4.2",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.2/nodopin.apk",
+  "sha256": "6bb3a268d3e2ea48cfcaa9660e2d9ded3e2bf7bc4d75a3ab20d87909778061ef",
+  "changelog": "Política de privacidad premium en Android, mejoras de preclaves E2EE para usuarios con y sin Google, intercambio inicial por Wi-Fi Direct y BLE y corrección de warnings de interfaz."
 }
