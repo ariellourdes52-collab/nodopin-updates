@@ -1,0 +1,107 @@
+name: NodoPIN — activar v1.4.0 solo tras verificar APK oficial
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nodopin-version-manifest-main
+  cancel-in-progress: false
+
+jobs:
+  update-version:
+    if: ${{ github.event.release.tag_name == 'v1.4.0' && !github.event.release.prerelease && !github.event.release.draft }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      EXPECTED_TAG: 'v1.4.0'
+      EXPECTED_SHA256: '1dc173a2f1ef0f5e8c0fbc860262eec412e5744bc3be80ee91acf83534d95548'
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Obtener versión actual de la rama main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Exigir exactamente un asset nodopin.apk en GitHub Release
+        shell: bash
+        run: |
+          set -euo pipefail
+          COUNT="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$EXPECTED_TAG" --jq '[.assets[] | select(.name == "nodopin.apk" and .state == "uploaded")] | length')"
+          if [[ "$COUNT" != '1' ]]; then
+            echo 'ERROR: falta la APK oficial o hay varios assets con el mismo nombre.' >&2
+            exit 1
+          fi
+
+      - name: Descargar y comprobar SHA-256 de APK firmada
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/nodopin-v1.4.0"
+          gh release download "$EXPECTED_TAG" --repo "$GITHUB_REPOSITORY" --pattern 'nodopin.apk' --dir "$RUNNER_TEMP/nodopin-v1.4.0"
+          printf '%s  %s\n' "$EXPECTED_SHA256" "$RUNNER_TEMP/nodopin-v1.4.0/nodopin.apk" | sha256sum -c -
+          echo 'OK: APK oficial 1.4.0 (56) comprobada.'
+
+      - name: Preparar version.json sin retroceder versionCode
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('nodopin/version.json')
+          current = json.loads(p.read_text(encoding='utf-8'))
+          old = int(current.get('versionCode', 0))
+          expected = '1dc173a2f1ef0f5e8c0fbc860262eec412e5744bc3be80ee91acf83534d95548'
+          if old > 56:
+              raise SystemExit('Hay una versión superior; se bloquea la regresión.')
+          if old == 56 and current.get('sha256') != expected:
+              raise SystemExit('Conflicto: versionCode 56 ya corresponde a otra APK.')
+          current.update({
+              'versionCode': 56,
+              'versionName': '1.4.0',
+              'downloadUrl': 'https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.0/nodopin.apk',
+              'sha256': expected,
+              'changelog': 'NodoPIN SOS con mapa integrado, precisión GPS estimada y guía de uso; acceso desde la barra de Android. Alarmas SOS y sísmicas se silencian al abrir la app o el chat. Avatares circulares en notificaciones y nombre NodoPIN SOS; compatibilidad preservada.'
+          })
+          p.write_text(json.dumps(current, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          PY
+
+      - name: Renovar README solo después de verificar APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('README.md')
+          content = p.read_text(encoding='utf-8')
+          old = '**v1.3.10 (55)** — cierre de grupos para todos con órdenes cifradas y limpieza de multimedia grupal identificada en Cloudflare D1/B2.'
+          new = '**v1.4.0 (56)** — alertas SOS y sísmicas que se silencian al atenderlas, tarjeta SOS con mapa y ubicación de alta precisión, instrucciones intuitivas y avatares circulares.'
+          old_link = '[Leer todas las novedades de v1.3.10](RELEASE_NOTES_v1.3.10.md)'
+          new_link = '[Leer todas las novedades de v1.4.0](RELEASE_NOTES_v1.4.0.md)'
+          if new in content and new_link in content:
+              print('README ya actualizado.')
+          elif old in content and old_link in content:
+              content = content.replace(old, new).replace(old_link, new_link)
+              p.write_text(content, encoding='utf-8')
+          else:
+              raise SystemExit('README cambió, no se reemplazará a ciegas.')
+          PY
+
+      - name: Activar v1.4.0 para actualizador y README
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- nodopin/version.json README.md; then
+            echo 'Manifiesto y README sin cambios.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- nodopin/version.json README.md
+          git commit -m 'release(nodopin): publicar v1.4.0 (56) después de verificar APK'
+          git push origin HEAD:main
