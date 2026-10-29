@@ -1,0 +1,36 @@
+name: NodoPIN — preparar borrador GitHub v1.4.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v1.4.0.md'
+      - '.github/workflows/prepare-nodopin-v1.4.0-draft.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Crear borrador sin publicarlo ni actualizar a los usuarios
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v1.4.0 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'La release ya existe: no se modifica.'
+            exit 0
+          fi
+          gh release create v1.4.0 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target main \
+            --draft \
+            --title '🚨 NodoPIN v1.4.0 (56) — SOS inteligente, GPS y alertas bajo control' \
+            --notes-file releases/v1.4.0.md
+          echo 'Borrador v1.4.0 creado. Adjuntar nodopin.apk antes de publicar.'
