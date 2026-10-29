@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.3.10 (55)** — cierre de grupos para todos con órdenes cifradas y limpieza de multimedia grupal identificada en Cloudflare D1/B2.
+**v1.4.0 (56)** — alertas SOS y sísmicas que se silencian al atenderlas, tarjeta SOS con mapa y ubicación precisa estimada, instrucciones intuitivas y fotos circulares en notificaciones.
 
-📋 [Leer todas las novedades de v1.3.10](RELEASE_NOTES_v1.3.10.md)
+📋 [Leer todas las novedades de v1.4.0](RELEASE_NOTES_v1.4.0.md)
 
 ## Instalación y actualización
 
