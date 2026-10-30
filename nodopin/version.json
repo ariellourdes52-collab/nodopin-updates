@@ -1,7 +1,7 @@
 {
-  "versionCode": 59,
-  "versionName": "1.4.3",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.3/nodopin.apk",
-  "sha256": "35f046c2a87ce9ddc81a1fcafe683a7d45de4aae6459ca8d87b7e91735545a5a",
-  "changelog": "Mensajes y confirmaciones D más fiables en segundo plano; recuperación de sincronización FCM para usuarios con Google y sin Google, sin cambios en la interfaz."
+  "versionCode": 60,
+  "versionName": "1.4.4",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.4/nodopin.apk",
+  "sha256": "b84d1f95412ada09d7a6587834767229dae96f036972b5b505d84100bbfc0537",
+  "changelog": "SOS por SMS directo como último recurso sin Internet ni enlace local; ubicación GPS en Google Maps; favoritos SOS y diseño mejorados."
 }

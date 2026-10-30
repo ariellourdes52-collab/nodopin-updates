@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.4.3 (59)** — mejoras de entrega FCM en segundo plano para usuarios con Google y sin Google, recuperación de mensajes y acuses D, sin cambios en la interfaz.
+**v1.4.4 (60)** — SOS celular directo sin Internet ni enlaces locales, GPS con enlace a Google Maps y experiencia SOS más elegante.
 
-📋 [Leer todas las novedades de v1.4.3](RELEASE_NOTES_v1.4.3.md)
+📋 [Leer todas las novedades de v1.4.4](RELEASE_NOTES_v1.4.4.md)
 
 ## Instalación y actualización
 
