@@ -71,7 +71,7 @@ jobs:
             'sha256':digest,
             'changelog':'Corregido el problema que podía congelar la aplicación al eliminar grupos.'
           })
-          updated=json.dumps(current,ensure_ascii=False,indent=2)+'\\n'
+          updated=json.dumps(current,ensure_ascii=False,indent=2)+'\n'
           if p.read_text(encoding='utf-8')!=updated:p.write_text(updated,encoding='utf-8')
           readme=Path('README.md')
           text=readme.read_text(encoding='utf-8')
