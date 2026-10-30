@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.4.4 (60)** — SOS celular directo sin Internet ni enlaces locales, GPS con enlace a Google Maps y experiencia SOS más elegante.
+**v1.4.5 (61)** — corrección del bloqueo que podía congelar la aplicación al eliminar grupos.
 
-📋 [Leer todas las novedades de v1.4.4](RELEASE_NOTES_v1.4.4.md)
+📋 [Leer todas las novedades de v1.4.5](RELEASE_NOTES_v1.4.5.md)
 
 ## Instalación y actualización
 

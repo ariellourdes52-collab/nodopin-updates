@@ -1,7 +1,7 @@
 {
-  "versionCode": 60,
-  "versionName": "1.4.4",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.4/nodopin.apk",
-  "sha256": "b84d1f95412ada09d7a6587834767229dae96f036972b5b505d84100bbfc0537",
-  "changelog": "SOS por SMS directo como último recurso sin Internet ni enlace local; ubicación GPS en Google Maps; favoritos SOS y diseño mejorados."
+  "versionCode": 61,
+  "versionName": "1.4.5",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.5/nodopin.apk",
+  "sha256": "6cca0e8f0f023bfc156e764442da06593e4cf32b54e1238947f73f4d8ee012fa",
+  "changelog": "Corregido el problema que podía congelar la aplicación al eliminar grupos."
 }
