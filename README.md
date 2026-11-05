@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.4.8 (64)** — actualizador premium y aviso de versión más estable.
+**v1.4.9 (65)** — seguridad App Check y protección del canal oficial.
 
-📋 [Leer todas las novedades de v1.4.8](RELEASE_NOTES_v1.4.8.md)
+📋 [Leer todas las novedades de v1.4.9](RELEASE_NOTES_v1.4.9.md)
 
 ## Instalación y actualización
 
