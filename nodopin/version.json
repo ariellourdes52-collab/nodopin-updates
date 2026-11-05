@@ -1,7 +1,7 @@
 {
-  "versionCode": 63,
-  "versionName": "1.4.7",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.7/nodopin.apk",
-  "sha256": "43cf1f846ba37e6a159bd05a1f75ba2526ce02ce71ec44305683c5046406979f",
-  "changelog": "Copia Integral NPINTEGRAL2 accesible desde la configuración inicial; se conservan identidad y funciones anteriores."
+  "versionCode": 64,
+  "versionName": "1.4.8",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.8/nodopin.apk",
+  "sha256": "76e2a06bb2dde7e33ffadd74c4ea433b986e17c3c6f0d5c0a6a9f85d8ec5e394",
+  "changelog": "Actualizador Premium: aviso de versión más estable, diseño renovado y descarga segura."
 }

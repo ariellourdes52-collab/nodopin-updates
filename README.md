@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.4.7 (63)** — Copia Integral NPINTEGRAL2 en configuración inicial, con identidad y funciones conservadas.
+**v1.4.8 (64)** — actualizador premium y aviso de versión más estable.
 
-📋 [Leer todas las novedades de v1.4.7](RELEASE_NOTES_v1.4.7.md)
+📋 [Leer todas las novedades de v1.4.8](RELEASE_NOTES_v1.4.8.md)
 
 ## Instalación y actualización
 
