@@ -1,0 +1,6 @@
+# NodoPin Android v1.4.9 (65)
+# Archivo: nodopin.apk
+# Tamaño: 14896185 bytes
+# Paquete: org.nodaviva.mesh
+# Certificado de firma SHA-256: 8e6f7abccb3d51533ec36ccc72cb19e3308b792f73a2f49856f96e3d06c01b86
+15d6dc691fe511fce013277bb8d9d86dac2f5c8b5a8bf4ca9fa0283e1cf25a5f  nodopin.apk
