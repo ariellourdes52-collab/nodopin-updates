@@ -1,7 +1,7 @@
 {
-  "versionCode": 65,
-  "versionName": "1.4.9",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.9/nodopin.apk",
-  "sha256": "15d6dc691fe511fce013277bb8d9d86dac2f5c8b5a8bf4ca9fa0283e1cf25a5f",
-  "changelog": "Seguridad App Check: integración de Play Integrity y tokens para el Worker oficial; se conservan mensajería cifrada, copias y actualizador premium."
+  "versionCode": 66,
+  "versionName": "1.5.0",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.0/nodopin.apk",
+  "sha256": "4c855718336725b803cd6ca88f035c2c4ca61acea248834c5bea0938dde224e0",
+  "changelog": "Recuperacion E2EE con reautenticacion Google bajo demanda, comprobacion de cuenta y PIN. Mensajeria y copias conservadas."
 }

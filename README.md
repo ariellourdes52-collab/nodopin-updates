@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.4.9 (65)** — seguridad App Check y protección del canal oficial.
+**v1.5.0 (66)** — recuperación E2EE con reautenticación Google.
 
-📋 [Leer todas las novedades de v1.4.9](RELEASE_NOTES_v1.4.9.md)
+📋 [Leer todas las novedades de v1.5.0](RELEASE_NOTES_v1.5.0.md)
 
 ## Instalación y actualización
 
