@@ -1,0 +1,28 @@
+name: NodoPin - preparar borrador v1.5.0
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v1.5.0.md'
+      - '.github/workflows/prepare-nodopin-v1.5.0-draft.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  prepare-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Crear borrador de lanzamiento sin APK
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v1.5.0 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "v1.5.0 ya existe; no modificar."
+            exit 0
+          fi
+          gh release create v1.5.0 --repo "$GITHUB_REPOSITORY" --target main --draft --title "🔐 NodoPin v1.5.0 (66) — Recuperación Google" --notes-file RELEASE_NOTES_v1.5.0.md
+          echo "Borrador listo. Adjuntar nodopin.apk y publicar tras verificar."
