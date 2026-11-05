@@ -28,18 +28,22 @@ Esta actualización de NodoPin Android mejora la experiencia al recibir una nuev
 - 🗂️ Acceso a Copia Integral NPINTEGRAL2 desde la configuración inicial, incorporado en v1.4.7.
 - 🎙️ Notas de voz, multimedia, grupos y Centro DR.
 
-## 📦 Identificación prevista del APK
+## 📦 Identificación del APK v1.4.8 verificado
 
 | Campo | Valor |
 | --- | --- |
 | Versión | `1.4.8` |
 | versionCode | `64` |
 | Paquete Android | `org.nodaviva.mesh` |
-| Archivo oficial | `nodopin.apk` |
+| Archivo oficial en GitHub | `nodopin.apk` |
+| Tamaño exacto | `14,896,185 bytes` |
+| SHA-256 del APK | `76e2a06bb2dde7e33ffadd74c4ea433b986e17c3c6f0d5c0a6a9f85d8ec5e394` |
+| SHA-256 del certificado de firma | `8e6f7abccb3d51533ec36ccc72cb19e3308b792f73a2f49856f96e3d06c01b86` |
 | Android mínimo | Android 8.0 (API 26) |
-| Firma | La misma firma del APK oficial v1.4.7 |
 
-**Importante:** las mejoras se prepararon a partir de código fuente. Su funcionamiento en dispositivos reales debe comprobarse tras compilar y firmar la APK. El flujo de GitHub comprueba el paquete, la versión y el certificado antes de activar el manifiesto de actualizaciones.
+**Verificación técnica del archivo entregado:** estructura ZIP íntegra, manifiesto Android 1.4.8 (64), firma APK v2 presente y certificado coincidente con la edición oficial v1.4.7. También se observaron cambios en el código DEX respecto a v1.4.7. Estas comprobaciones no sustituyen pruebas funcionales completas ni una auditoría criptográfica de todos los contenidos en dispositivos reales.
+
+**Publicación segura:** el archivo adjunto a la release debe llamarse exactamente `nodopin.apk` y su SHA-256 debe coincidir con el indicado. La actualización del manifiesto del actualizador se habilita solamente tras verificarlo.
 
 ## ⬇️ Cómo actualizar
 
