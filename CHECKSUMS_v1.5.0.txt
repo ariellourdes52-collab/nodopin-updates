@@ -1,0 +1,4 @@
+# NodoPin v1.5.0 (66) — checksum oficial
+# Solo del archivo validado aportado por el desarrollador
+4c855718336725b803cd6ca88f035c2c4ca61acea248834c5bea0938dde224e0  nodopin.apk
+# SHA-256 del certificado Android: 8e6f7abccb3d51533ec36ccc72cb19e3308b792f73a2f49856f96e3d06c01b86
