@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.4.6 (62)** — chats fijados (hasta 5), QR inmediato y sincronización de chats optimizada.
+**v1.4.7 (63)** — Copia Integral NPINTEGRAL2 en configuración inicial, con identidad y funciones conservadas.
 
-📋 [Leer todas las novedades de v1.4.6](RELEASE_NOTES_v1.4.6.md)
+📋 [Leer todas las novedades de v1.4.7](RELEASE_NOTES_v1.4.7.md)
 
 ## Instalación y actualización
 

@@ -1,7 +1,7 @@
 {
-  "versionCode": 62,
-  "versionName": "1.4.6",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.6/nodopin.apk",
-  "sha256": "360431b2c7bd3d8e476919dde4950b888273ac4d9eb9fe6f53b9033e33096a35",
-  "changelog": "Hasta 5 chats fijados, invitaciones QR Android más rápidas y sincronización de chats optimizada."
+  "versionCode": 63,
+  "versionName": "1.4.7",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.7/nodopin.apk",
+  "sha256": "43cf1f846ba37e6a159bd05a1f75ba2526ce02ce71ec44305683c5046406979f",
+  "changelog": "Copia Integral NPINTEGRAL2 accesible desde la configuración inicial; se conservan identidad y funciones anteriores."
 }
