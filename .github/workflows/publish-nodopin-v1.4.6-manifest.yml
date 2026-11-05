@@ -1,0 +1,99 @@
+name: NodoPin — activar v1.4.6 solo con APK verificada
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nodopin-v1.4.6-manifest
+  cancel-in-progress: false
+
+jobs:
+  update-version:
+    if: ${{ github.event.release.tag_name == 'v1.4.6' && !github.event.release.draft && !github.event.release.prerelease }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      EXPECTED_TAG: v1.4.6
+      EXPECTED_SHA256: 360431b2c7bd3d8e476919dde4950b888273ac4d9eb9fe6f53b9033e33096a35
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Descargar rama oficial
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Exigir un único archivo nodopin.apk
+        shell: bash
+        run: |
+          set -euo pipefail
+          COUNT="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$EXPECTED_TAG" --jq '[.assets[] | select(.name == "nodopin.apk" and .state == "uploaded")] | length')"
+          TOTAL="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$EXPECTED_TAG" --jq '.assets | length')"
+          if [[ "$COUNT" != "1" || "$TOTAL" != "1" ]]; then
+            echo "ERROR: se requiere exactamente un asset nodopin.apk; NO activar actualizador." >&2
+            exit 1
+          fi
+
+      - name: Verificar bytes descargados contra SHA-256 oficial
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/nodopin-1.4.6"
+          gh release download "$EXPECTED_TAG" --repo "$GITHUB_REPOSITORY" --pattern nodopin.apk --dir "$RUNNER_TEMP/nodopin-1.4.6"
+          printf '%s  %s\n' "$EXPECTED_SHA256" "$RUNNER_TEMP/nodopin-1.4.6/nodopin.apk" | sha256sum -c -
+
+      - name: Actualizar version.json y README sin retrocesos
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('nodopin/version.json')
+          current=json.loads(p.read_text(encoding='utf-8'))
+          code=int(current.get('versionCode',0))
+          digest='360431b2c7bd3d8e476919dde4950b888273ac4d9eb9fe6f53b9033e33096a35'
+          if code>62: raise SystemExit('Versión superior instalada; no retroceder')
+          if code==62 and current.get('sha256')!=digest:
+              raise SystemExit('Otra APK ocupa versionCode 62; revisión manual')
+          current.update({
+            'versionCode':62,
+            'versionName':'1.4.6',
+            'downloadUrl':'https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.6/nodopin.apk',
+            'sha256':digest,
+            'changelog':'Hasta 5 chats fijados, invitaciones QR Android más rápidas y sincronización de chats optimizada.'
+          })
+          new=json.dumps(current,ensure_ascii=False,indent=2)+'\n'
+          if p.read_text(encoding='utf-8')!=new:p.write_text(new,encoding='utf-8')
+          readme=Path('README.md')
+          text=readme.read_text(encoding='utf-8')
+          before='**v1.4.5 (61)** — corrección del bloqueo que podía congelar la aplicación al eliminar grupos.'
+          after='**v1.4.6 (62)** — chats fijados (hasta 5), QR inmediato y sincronización de chats optimizada.'
+          before_link='[Leer todas las novedades de v1.4.5](RELEASE_NOTES_v1.4.5.md)'
+          after_link='[Leer todas las novedades de v1.4.6](RELEASE_NOTES_v1.4.6.md)'
+          if after in text and after_link in text:
+              print('README ya actualizado')
+          elif before in text and before_link in text:
+              readme.write_text(text.replace(before,after).replace(before_link,after_link),encoding='utf-8')
+          else:
+              raise SystemExit('README distinto del esperado; no modificar a ciegas')
+          PY
+
+      - name: Publicar manifest solo tras verificar asset
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- nodopin/version.json README.md; then
+            echo 'Manifest ya actualizado.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add nodopin/version.json README.md
+          git commit -m 'release(nodopin): activar v1.4.6 (62) tras verificar APK'
+          git pull --rebase origin main
+          git push origin HEAD:main
