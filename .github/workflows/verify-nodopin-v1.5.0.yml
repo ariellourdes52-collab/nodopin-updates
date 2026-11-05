@@ -1,20 +1,62 @@
-name: NodoPin verificar v1.5.0
+name: NodoPin verificar y activar v1.5.0
 on:
   release:
     types: [published]
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: nodopin-v1.5.0-manifest
+  cancel-in-progress: false
 jobs:
   verify:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.release.tag_name == 'v1.5.0' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verificar APK publicada
+        with:
+          ref: main
+      - name: Verificar release y archivo exacto
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          gh release view v1.5.0 --json isDraft,isPrerelease,assets | python3 -c "import json,sys; x=json.load(sys.stdin); assert not x['isDraft'] and not x['isPrerelease']; assert len(x['assets'])==1 and x['assets'][0]['name']=='nodopin.apk'"
+          gh release view v1.5.0 --json isDraft,isPrerelease,assets | python3 -c "import json,sys; x=json.load(sys.stdin); a=x['assets']; assert not x['isDraft'] and not x['isPrerelease']; assert len(a)==1 and a[0]['name']=='nodopin.apk' and a[0]['size']==14896185"
           gh release download v1.5.0 --pattern nodopin.apk
           echo "4c855718336725b803cd6ca88f035c2c4ca61acea248834c5bea0938dde224e0  nodopin.apk" | sha256sum -c -
+      - name: Activar actualizador solo tras verificar APK
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('nodopin/version.json')
+          x=json.loads(p.read_text(encoding='utf8'))
+          if int(x.get('versionCode',0))>66:raise SystemExit('Existe version posterior')
+          sha='4c855718336725b803cd6ca88f035c2c4ca61acea248834c5bea0938dde224e0'
+          if int(x.get('versionCode',0))==66 and x.get('sha256')!=sha:raise SystemExit('Conflicto de SHA')
+          x.update(versionCode=66,versionName='1.5.0',
+            downloadUrl='https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.0/nodopin.apk',
+            sha256=sha,
+            changelog='Recuperacion E2EE con reautenticacion Google bajo demanda, comprobacion de cuenta y PIN. Mensajeria y copias conservadas.')
+          p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+          p=Path('README.md')
+          s=p.read_text(encoding='utf8')
+          old='**v1.4.9 (65)** — seguridad App Check y protección del canal oficial.'
+          new='**v1.5.0 (66)** — recuperación E2EE con reautenticación Google.'
+          oldlink='[Leer todas las novedades de v1.4.9](RELEASE_NOTES_v1.4.9.md)'
+          newlink='[Leer todas las novedades de v1.5.0](RELEASE_NOTES_v1.5.0.md)'
+          if new not in s or newlink not in s:
+            if old not in s or oldlink not in s:raise SystemExit('README inesperado')
+            p.write_text(s.replace(old,new).replace(oldlink,newlink),encoding='utf8')
+          PY
+          if git diff --quiet -- nodopin/version.json README.md; then
+            echo "Manifiesto ya actualizado."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add nodopin/version.json README.md
+          git commit -m "release: activar v1.5.0 tras verificar APK"
+          git pull --rebase origin main
+          git push origin HEAD:main
