@@ -1,0 +1,32 @@
+name: NodoPin — sincronizar notas de borrador v1.4.8
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v1.4.8.md'
+      - '.github/workflows/sync-nodopin-v1.4.8-draft-notes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Actualizar únicamente las notas del borrador existente
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          state="$(gh api "repos/$GITHUB_REPOSITORY/releases" --paginate --jq '.[] | select(.tag_name == "v1.4.8") | .draft' | head -n 1)"
+          if [[ "$state" != "true" ]]; then
+            echo 'La release v1.4.8 no es un borrador; no modificar.'
+            exit 0
+          fi
+          gh release edit v1.4.8 --repo "$GITHUB_REPOSITORY" --notes-file releases/v1.4.8.md
+          echo 'Notas con SHA-256 actualizadas; se mantiene el borrador y sus assets.'
