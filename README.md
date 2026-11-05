@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.4.5 (61)** — corrección del bloqueo que podía congelar la aplicación al eliminar grupos.
+**v1.4.6 (62)** — chats fijados (hasta 5), QR inmediato y sincronización de chats optimizada.
 
-📋 [Leer todas las novedades de v1.4.5](RELEASE_NOTES_v1.4.5.md)
+📋 [Leer todas las novedades de v1.4.6](RELEASE_NOTES_v1.4.6.md)
 
 ## Instalación y actualización
 

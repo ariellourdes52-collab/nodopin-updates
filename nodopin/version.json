@@ -1,7 +1,7 @@
 {
-  "versionCode": 61,
-  "versionName": "1.4.5",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.5/nodopin.apk",
-  "sha256": "6cca0e8f0f023bfc156e764442da06593e4cf32b54e1238947f73f4d8ee012fa",
-  "changelog": "Corregido el problema que podía congelar la aplicación al eliminar grupos."
+  "versionCode": 62,
+  "versionName": "1.4.6",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.6/nodopin.apk",
+  "sha256": "360431b2c7bd3d8e476919dde4950b888273ac4d9eb9fe6f53b9033e33096a35",
+  "changelog": "Hasta 5 chats fijados, invitaciones QR Android más rápidas y sincronización de chats optimizada."
 }
