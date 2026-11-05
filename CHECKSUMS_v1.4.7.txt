@@ -1,0 +1,5 @@
+# NodoPin Android 1.4.7 (63)
+# APK: 14896185 bytes
+# Package: org.nodaviva.mesh
+# Signing certificate SHA-256: 8e6f7abccb3d51533ec36ccc72cb19e3308b792f73a2f49856f96e3d06c01b86
+43cf1f846ba37e6a159bd05a1f75ba2526ce02ce71ec44305683c5046406979f  nodopin.apk
