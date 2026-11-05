@@ -1,0 +1,178 @@
+name: NodoPin — activar v1.4.8 tras verificar APK oficial
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nodopin-v1.4.8-manifest
+  cancel-in-progress: false
+
+jobs:
+  validate-and-publish:
+    if: ${{ github.event.release.tag_name == 'v1.4.8' && !github.event.release.draft && !github.event.release.prerelease }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      EXPECTED_TAG: v1.4.8
+      EXPECTED_SHA256: 76e2a06bb2dde7e33ffadd74c4ea433b986e17c3c6f0d5c0a6a9f85d8ec5e394
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Exigir un único asset llamado nodopin.apk
+        shell: bash
+        run: |
+          set -euo pipefail
+          COUNT="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$EXPECTED_TAG" --jq '[.assets[] | select(.name == "nodopin.apk" and .state == "uploaded")] | length')"
+          TOTAL="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$EXPECTED_TAG" --jq '.assets | length')"
+          if [[ "$COUNT" != "1" || "$TOTAL" != "1" ]]; then
+            echo "ERROR: adjunta únicamente nodopin.apk. Se mantiene el JSON anterior." >&2
+            exit 1
+          fi
+
+      - name: Descargar y verificar SHA-256 de la APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/nodopin-1.4.8"
+          gh release download "$EXPECTED_TAG" --repo "$GITHUB_REPOSITORY" --pattern "nodopin.apk" --dir "$RUNNER_TEMP/nodopin-1.4.8"
+          printf '%s  %s\n' "$EXPECTED_SHA256" "$RUNNER_TEMP/nodopin-1.4.8/nodopin.apk" | sha256sum -c -
+
+      - name: Verificar manifiesto Android y certificado v2
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK="$RUNNER_TEMP/nodopin-1.4.8/nodopin.apk"
+          python3 - "$APK" <<'PY'
+          import sys,zipfile,struct,hashlib
+          path=sys.argv[1]
+          with zipfile.ZipFile(path) as z:
+              if z.testzip():raise SystemExit('APK ZIP corrupto')
+              manifest=z.read('AndroidManifest.xml')
+          def w(o):return struct.unpack_from('<H',manifest,o)[0]
+          def d(o):return struct.unpack_from('<I',manifest,o)[0]
+          def strings(o):
+              h=w(o+2); count=d(o+8); flags=d(o+16); start=d(o+20); utf8=bool(flags&0x100)
+              def n8(pos):
+                  v=manifest[pos]
+                  return (((v&127)<<8)|manifest[pos+1],pos+2) if v&128 else (v,pos+1)
+              def n16(pos):
+                  v=w(pos)
+                  return (((v&0x7fff)<<16)|w(pos+2),pos+4) if v&0x8000 else (v,pos+2)
+              a=[]
+              for i in range(count):
+                  pos=o+start+d(o+h+i*4)
+                  if utf8:
+                      _,pos=n8(pos); n,pos=n8(pos)
+                      a.append(manifest[pos:pos+n].decode('utf-8'))
+                  else:
+                      n,pos=n16(pos)
+                      a.append(manifest[pos:pos+2*n].decode('utf-16le'))
+              return a
+          o=8; names=[]; parsed={}
+          while o+8<=len(manifest):
+              typ=w(o);size=d(o+4)
+              if size<8 or o+size>len(manifest):break
+              if typ==1:names=strings(o)
+              if typ==0x102 and names:
+                  tag=names[d(o+20)]
+                  if tag=='manifest':
+                      start=w(o+24);count=w(o+28)
+                      for i in range(count):
+                          q=o+16+start+20*i
+                          key=names[d(q+4)]
+                          raw=d(q+8);t=manifest[q+15];value=d(q+16)
+                          parsed[key]=names[raw] if raw<len(names) else names[value] if t==3 else value
+              o+=size
+          print(parsed)
+          if (parsed.get('package'),parsed.get('versionName'),parsed.get('versionCode'))!=('org.nodaviva.mesh','1.4.8',64):
+              raise SystemExit('Manifest Android incorrecto')
+          with open(path,'rb') as f:
+              f.seek(0,2);total=f.tell();f.seek(max(0,total-65557));tail=f.read()
+              end=tail.rfind(b'PK\x05\x06')
+              if end<0:raise SystemExit('EOCD ausente')
+              central=struct.unpack_from('<I',tail,end+16)[0]
+              f.seek(central-24);foot=f.read(24)
+              if foot[8:]!=b'APK Sig Block 42':raise SystemExit('Bloque de firma ausente')
+              size=struct.unpack_from('<Q',foot,0)[0]
+              f.seek(central-size-8);block=f.read(size+8)
+          p=8;der=None
+          while p<len(block)-24:
+              n=struct.unpack_from('<Q',block,p)[0]
+              scheme=struct.unpack_from('<I',block,p+8)[0]
+              value=block[p+12:p+8+n]
+              if scheme==0x7109871a:
+                  length=struct.unpack_from('<I',value,0)[0]
+                  signer=value[4:4+length]
+                  sl=struct.unpack_from('<I',signer,0)[0]
+                  signed=signer[4:4+sl]
+                  dlen=struct.unpack_from('<I',signed,0)[0];o=4+dlen
+                  clen=struct.unpack_from('<I',signed,o)[0];o+=4
+                  certificates=signed[o:o+clen]
+                  derlen=struct.unpack_from('<I',certificates,0)[0]
+                  der=certificates[4:4+derlen]
+                  break
+              p+=8+n
+          if der is None or hashlib.sha256(der).hexdigest()!='8e6f7abccb3d51533ec36ccc72cb19e3308b792f73a2f49856f96e3d06c01b86':
+              raise SystemExit('Certificado oficial no coincide')
+          print('APK: versión 1.4.8 (64), paquete y certificado correctos')
+          PY
+
+      - name: Actualizar JSON oficial y README
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path('nodopin/version.json')
+          obj=json.loads(path.read_text(encoding='utf-8'))
+          old=int(obj.get('versionCode',0))
+          digest='76e2a06bb2dde7e33ffadd74c4ea433b986e17c3c6f0d5c0a6a9f85d8ec5e394'
+          if old>64:raise SystemExit('La versión actual es superior; no retroceder')
+          if old==64 and obj.get('sha256')!=digest:
+              raise SystemExit('VersionCode 64 tiene otro SHA-256; revisión manual')
+          obj.update({
+             'versionCode':64,
+             'versionName':'1.4.8',
+             'downloadUrl':'https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.8/nodopin.apk',
+             'sha256':digest,
+             'changelog':'Aviso de actualización persistente y rediseño premium con el logo oficial, temas claro/oscuro y descarga segura.'
+          })
+          expected=json.dumps(obj,ensure_ascii=False,indent=2)+'\n'
+          if path.read_text(encoding='utf-8')!=expected:path.write_text(expected,encoding='utf-8')
+          readme=Path('README.md')
+          current=readme.read_text(encoding='utf-8')
+          old_line='**v1.4.7 (63)** — Copia Integral NPINTEGRAL2 en configuración inicial, con identidad y funciones conservadas.'
+          new_line='**v1.4.8 (64)** — actualizador premium, aviso estable y descarga verificada.'
+          old_link='[Leer todas las novedades de v1.4.7](RELEASE_NOTES_v1.4.7.md)'
+          new_link='[Leer todas las novedades de v1.4.8](RELEASE_NOTES_v1.4.8.md)'
+          if new_line in current and new_link in current:
+              print('README ya actualizado')
+          elif old_line in current and old_link in current:
+              readme.write_text(current.replace(old_line,new_line).replace(old_link,new_link),encoding='utf-8')
+          else:
+              raise SystemExit('README distinto de lo esperado; no modificar')
+          PY
+
+      - name: Confirmar JSON solo después de validar APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- nodopin/version.json README.md; then
+            echo 'JSON y README ya actualizados.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add nodopin/version.json README.md
+          git commit -m 'release(nodopin): activar v1.4.8 (64) tras verificar APK'
+          git pull --rebase origin main
+          git push origin HEAD:main
