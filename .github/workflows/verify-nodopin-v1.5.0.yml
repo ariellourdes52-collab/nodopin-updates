@@ -1,0 +1,20 @@
+name: NodoPin verificar v1.5.0
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar APK publicada
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh release view v1.5.0 --json isDraft,isPrerelease,assets | python3 -c "import json,sys; x=json.load(sys.stdin); assert not x['isDraft'] and not x['isPrerelease']; assert len(x['assets'])==1 and x['assets'][0]['name']=='nodopin.apk'"
+          gh release download v1.5.0 --pattern nodopin.apk
+          echo "4c855718336725b803cd6ca88f035c2c4ca61acea248834c5bea0938dde224e0  nodopin.apk" | sha256sum -c -
