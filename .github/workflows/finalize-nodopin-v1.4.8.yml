@@ -1,0 +1,102 @@
+name: NodoPin — cerrar publicación v1.4.8 con SHA oficial
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/finalize-nodopin-v1.4.8.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nodopin-v1.4.8-finalize
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      EXPECTED_SHA256: 76e2a06bb2dde7e33ffadd74c4ea433b986e17c3c6f0d5c0a6a9f85d8ec5e394
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Confirmar release publicada y APK oficial única
+        shell: bash
+        run: |
+          set -euo pipefail
+          RELEASE_JSON="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/v1.4.8")"
+          printf '%s' "$RELEASE_JSON" | python3 -c '
+          import json,sys
+          x=json.load(sys.stdin)
+          assets=x.get("assets",[])
+          if x.get("draft") or x.get("prerelease") or len(assets)!=1 or assets[0].get("name")!="nodopin.apk" or assets[0].get("state")!="uploaded":
+              sys.exit("ERROR: release no publicada o assets incorrectos")
+          if assets[0].get("size")!=14896185:
+              sys.exit("ERROR: tamaño del APK incorrecto")
+          print("Release y APK única: correctas")
+          '
+          mkdir -p "$RUNNER_TEMP/nodopin-1.4.8"
+          gh release download v1.4.8 --repo "$GITHUB_REPOSITORY" --pattern "nodopin.apk" --dir "$RUNNER_TEMP/nodopin-1.4.8"
+          printf '%s  %s\n' "$EXPECTED_SHA256" "$RUNNER_TEMP/nodopin-1.4.8/nodopin.apk" | sha256sum -c -
+
+      - name: Actualizar notas públicas de release con SHA verificado
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F "$EXPECTED_SHA256" releases/v1.4.8.md
+          gh release edit v1.4.8 --repo "$GITHUB_REPOSITORY" --notes-file releases/v1.4.8.md
+      - name: Actualizar JSON y README oficiales
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("nodopin/version.json")
+          obj=json.loads(p.read_text(encoding="utf-8"))
+          code=int(obj.get("versionCode",0))
+          digest="76e2a06bb2dde7e33ffadd74c4ea433b986e17c3c6f0d5c0a6a9f85d8ec5e394"
+          if code>64:raise SystemExit("Versión superior encontrada; no retroceder")
+          if code==64 and obj.get("sha256")!=digest:
+              raise SystemExit("Conflicto SHA-256 en versionCode 64")
+          obj.update({
+              "versionCode":64,
+              "versionName":"1.4.8",
+              "downloadUrl":"https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.4.8/nodopin.apk",
+              "sha256":digest,
+              "changelog":"Actualizador Premium: aviso de versión más estable, diseño renovado y descarga segura."
+          })
+          new=json.dumps(obj,ensure_ascii=False,indent=2)+"\n"
+          if p.read_text(encoding="utf-8")!=new:p.write_text(new,encoding="utf-8")
+          p=Path("README.md")
+          old=p.read_text(encoding="utf-8")
+          before="**v1.4.7 (63)** — Copia Integral NPINTEGRAL2 en configuración inicial, con identidad y funciones conservadas."
+          after="**v1.4.8 (64)** — actualizador premium y aviso de versión más estable."
+          link_before="[Leer todas las novedades de v1.4.7](RELEASE_NOTES_v1.4.7.md)"
+          link_after="[Leer todas las novedades de v1.4.8](RELEASE_NOTES_v1.4.8.md)"
+          if after in old and link_after in old:print("README ya actualizado")
+          elif before in old and link_before in old:
+              p.write_text(old.replace(before,after).replace(link_before,link_after),encoding="utf-8")
+          else:
+              raise SystemExit("README inesperado; no modificar")
+          PY
+      - name: Guardar JSON tras la verificación oficial
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- nodopin/version.json README.md; then
+            echo 'JSON y README ya estaban correctos.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add nodopin/version.json README.md
+          git commit -m 'release(nodopin): activar v1.4.8 (64) y SHA oficial'
+          git pull --rebase origin main
+          git push origin HEAD:main
