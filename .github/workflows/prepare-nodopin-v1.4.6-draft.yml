@@ -1,0 +1,36 @@
+name: NodoPin — preparar borrador GitHub v1.4.6
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v1.4.6.md'
+      - '.github/workflows/prepare-nodopin-v1.4.6-draft.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Crear release en borrador sin publicar APK
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v1.4.6 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "La release v1.4.6 ya existe; no se reemplaza."
+            exit 0
+          fi
+          gh release create v1.4.6 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target main \
+            --draft \
+            --title '🚀 NodoPin v1.4.6 (62) — Chats fijados, QR inmediato y mejor sincronización' \
+            --notes-file releases/v1.4.6.md
+          echo 'Borrador preparado: adjuntar nodopin.apk y publicar.'
