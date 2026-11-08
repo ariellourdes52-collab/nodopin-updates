@@ -1,0 +1,28 @@
+name: NodoPin — preparar borrador v1.5.1
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v1.5.1.md'
+      - '.github/workflows/prepare-nodopin-v1.5.1-draft.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Crear borrador sin APK
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v1.5.1 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "La versión v1.5.1 ya existe. No modificar."
+            exit 0
+          fi
+          gh release create v1.5.1 --repo "$GITHUB_REPOSITORY" --target main --draft --title "🚀 NodoPin v1.5.1 (67) — Grupos, multimedia y seguridad" --notes-file releases/v1.5.1.md
+          echo "Borrador preparado. Adjuntar nodopin.apk, después publicar."
