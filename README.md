@@ -19,9 +19,9 @@
 
 ## Última versión preparada
 
-**v1.5.0 (66)** — recuperación E2EE con reautenticación Google.
+**v1.5.1 (67)** — grupos, multimedia y seguridad reforzada.
 
-📋 [Leer todas las novedades de v1.5.0](RELEASE_NOTES_v1.5.0.md)
+📋 [Leer todas las novedades de v1.5.1](RELEASE_NOTES_v1.5.1.md)
 
 ## Instalación y actualización
 

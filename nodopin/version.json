@@ -1,7 +1,7 @@
 {
-  "versionCode": 66,
-  "versionName": "1.5.0",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.0/nodopin.apk",
-  "sha256": "4c855718336725b803cd6ca88f035c2c4ca61acea248834c5bea0938dde224e0",
-  "changelog": "Recuperacion E2EE con reautenticacion Google bajo demanda, comprobacion de cuenta y PIN. Mensajeria y copias conservadas."
+  "versionCode": 67,
+  "versionName": "1.5.1",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.1/nodopin.apk",
+  "sha256": "61db01286d4a3918a8bbd0f9dc34d717a1c39671721f9804887ea26829fb7b53",
+  "changelog": "Grupos y multimedia HD mejorados, estados S/D/R y controles P1/P2; recuperación Google y App Check conservados."
 }
