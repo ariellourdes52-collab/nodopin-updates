@@ -1,7 +1,7 @@
 {
-  "versionCode": 68,
-  "versionName": "1.5.2",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.2/nodopin.apk",
-  "sha256": "8ca8997bbb5201e3eaea75b13ee03cfff75aa8ffef222d235d6fc7b8ba5a4240",
-  "changelog": "Notificaciones FCM restauradas y registro de dispositivo corregido; seguridad App Check y controles P1/P2 conservados."
+  "versionCode": 69,
+  "versionName": "1.5.3",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.3/nodopin.apk",
+  "sha256": "25598ba7cebbdcab7c333ced0c386ad3d1b90499407c2dc4e2f117df4a4a5142",
+  "changelog": "Seguridad BLE reforzada: HELLO no elimina alertas de identidad, comprobación E2EE opcional y prevención de respuestas reutilizadas. Se conservan Wi-Fi Direct, NLDR1, notificaciones FCM, grupos, P1/P2 y App Check."
 }
