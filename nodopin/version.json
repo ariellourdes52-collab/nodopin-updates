@@ -1,7 +1,7 @@
 {
-  "versionCode": 67,
-  "versionName": "1.5.1",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.1/nodopin.apk",
-  "sha256": "61db01286d4a3918a8bbd0f9dc34d717a1c39671721f9804887ea26829fb7b53",
-  "changelog": "Grupos y multimedia HD mejorados, estados S/D/R y controles P1/P2; recuperación Google y App Check conservados."
+  "versionCode": 68,
+  "versionName": "1.5.2",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.2/nodopin.apk",
+  "sha256": "8ca8997bbb5201e3eaea75b13ee03cfff75aa8ffef222d235d6fc7b8ba5a4240",
+  "changelog": "Notificaciones FCM restauradas y registro de dispositivo corregido; seguridad App Check y controles P1/P2 conservados."
 }
