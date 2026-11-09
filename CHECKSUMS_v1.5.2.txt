@@ -1,0 +1,5 @@
+SHA-256  nodopin.apk
+8ca8997bbb5201e3eaea75b13ee03cfff75aa8ffef222d235d6fc7b8ba5a4240  nodopin.apk
+
+Version: 1.5.2 (68)
+Package: org.nodaviva.mesh
