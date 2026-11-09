@@ -1,0 +1,139 @@
+name: NodoPin — cerrar v1.5.2 con SHA oficial
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/finalize-nodopin-v1.5.2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nodopin-v1.5.2-finalize
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      EXPECTED_SHA256: 8ca8997bbb5201e3eaea75b13ee03cfff75aa8ffef222d235d6fc7b8ba5a4240
+      EXPECTED_CERT_SHA256: 8e6f7abccb3d51533ec36ccc72cb19e3308b792f73a2f49856f96e3d06c01b86
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Validar release publicada y único APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/releases/tags/v1.5.2" > "$RUNNER_TEMP/nodopin_release.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          x=json.loads((Path(os.environ["RUNNER_TEMP"])/"nodopin_release.json").read_text())
+          a=x.get("assets",[])
+          expected="sha256:"+os.environ["EXPECTED_SHA256"]
+          assert x.get("tag_name")=="v1.5.2" and x.get("draft") is False and x.get("prerelease") is False, "Release no publica o tag inesperado"
+          assert len(a)==1 and a[0].get("name")=="nodopin.apk" and a[0].get("state")=="uploaded", "Asset inesperado"
+          assert a[0].get("size")==14666632, "Tamaño distinto"
+          assert a[0].get("digest")==expected, "SHA oficial de GitHub no coincide"
+          print("Release publicada, APK unico, tamaño y SHA GitHub correctos")
+          PY
+          mkdir -p "$RUNNER_TEMP/nodopin-v1.5.2"
+          gh release download v1.5.2 --repo "$GITHUB_REPOSITORY" --pattern "nodopin.apk" --dir "$RUNNER_TEMP/nodopin-v1.5.2"
+          printf '%s  %s\n' "$EXPECTED_SHA256" "$RUNNER_TEMP/nodopin-v1.5.2/nodopin.apk" | sha256sum -c -
+
+      - name: Validar paquete, versionCode y certificado Android
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK_DIR="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          AAPT="$(find "$SDK_DIR/build-tools" -mindepth 2 -maxdepth 2 -type f -name aapt | sort -V | tail -n 1)"
+          APKSIGNER="$(find "$SDK_DIR/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -n 1)"
+          test -n "$AAPT" && test -n "$APKSIGNER"
+          APK="$RUNNER_TEMP/nodopin-v1.5.2/nodopin.apk"
+          PKG="$("$AAPT" dump badging "$APK" | grep '^package:' | head -n 1)"
+          printf '%s\n' "$PKG"
+          printf '%s\n' "$PKG" | grep -Eq "^package: name='org\.nodaviva\.mesh' versionCode='68' versionName='1\.5\.2'"
+          "$APKSIGNER" verify --print-certs "$APK" > "$RUNNER_TEMP/apk_signer.txt"
+          CERT="$(grep -i 'certificate SHA-256 digest:' "$RUNNER_TEMP/apk_signer.txt" | head -n 1 | awk '{print $NF}' | tr -d ':' | tr '[:upper:]' '[:lower:]')"
+          test "$CERT" = "$EXPECTED_CERT_SHA256"
+          echo "Manifest 1.5.2 (68) y firma Android oficial comprobados"
+
+      - name: Preparar notas publicas actualizadas sin revertir ediciones
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release view v1.5.2 --repo "$GITHUB_REPOSITORY" --json body --jq .body > "$RUNNER_TEMP/live_notes.md"
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          f=Path(os.environ["RUNNER_TEMP"])/"live_notes.md"
+          s=f.read_text(encoding="utf-8")
+          sha=os.environ["EXPECTED_SHA256"]
+          cert=os.environ["EXPECTED_CERT_SHA256"]
+          old="| SHA-256 del APK comprobado | **Pendiente de comprobar al adjuntar el APK** |"
+          new=f"| SHA-256 del APK comprobado | `{sha}` |"
+          if old in s:s=s.replace(old,new)
+          elif new not in s:raise SystemExit("Notas publicas cambiaron: no sobrescribir SHA existente")
+          s=s.replace("| APK por adjuntar | **`nodopin.apk`** |","| APK oficial publicado | **`nodopin.apk`** (14,666,632 bytes) |")
+          s=s.replace("| Certificado de firma | **Pendiente de comprobar al adjuntar el APK** |","| Certificado de firma | **Verificado, coincide con v1.5.1** |")
+          s=s.replace(f"| SHA-256 del certificado | **Referencia anterior v1.5.1:** `{cert}` |",f"| SHA-256 del certificado | `{cert}` |")
+          s=s.replace("**Comprobaciones realizadas:** se preparó el identificador previsto de publicación `1.5.2 (68)`; la validación de la firma y del paquete final deberá completarse con el APK adjunto. Estas comprobaciones no equivalen a una auditoría de seguridad completa.","**Comprobaciones realizadas:** APK descargado de la publicación y SHA-256 confirmado; manifiesto Android `1.5.2 (68)`, paquete `org.nodaviva.mesh` y certificado de firma verificados. Esto no sustituye una auditoría de seguridad completa.")
+          s=s.replace(" desde los archivos adjuntos de esta publicación una vez publicada."," desde los archivos adjuntos de esta publicación.")
+          s=s.replace("**Importante:** la actualización automática y el archivo `nodopin/version.json` se modificarán únicamente después de adjuntar y verificar el APK final y publicar la versión. Este borrador no activa una actualización.","**Actualización oficial:** `nodopin/version.json` anuncia v1.5.2 (68) con el SHA-256 del APK verificado.")
+          if s.count(sha)!=1:raise SystemExit("SHA repetido o ausente en notas")
+          f.write_text(s,encoding="utf-8")
+          Path("releases/v1.5.2.md").write_text(s,encoding="utf-8")
+          PY
+
+      - name: Actualizar manifiesto sin permitir retrocesos
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path("nodopin/version.json")
+          x=json.loads(p.read_text(encoding="utf-8"))
+          code=int(x["versionCode"])
+          expected=os.environ["EXPECTED_SHA256"]
+          if code>68:raise SystemExit("Version superior publicada, no retroceder")
+          if code==68 and (x.get("versionName")!="1.5.2" or x.get("sha256")!=expected):raise SystemExit("Conflicto con version 68 existente")
+          if code==67 and x.get("versionName")!="1.5.1":raise SystemExit("Origen de version inesperado")
+          if code<67:raise SystemExit("Version anterior inesperada")
+          x.update({
+            "versionCode":68,
+            "versionName":"1.5.2",
+            "downloadUrl":"https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.2/nodopin.apk",
+            "sha256":expected,
+            "changelog":"Notificaciones FCM restauradas y registro de dispositivo corregido; seguridad App Check y controles P1/P2 conservados."
+          })
+          p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print(p.read_text())
+          PY
+          if git diff --quiet -- releases/v1.5.2.md nodopin/version.json; then
+            echo "Notas fuente y JSON ya actualizados"
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add releases/v1.5.2.md nodopin/version.json
+            git commit -m 'release(nodopin): verificar APK v1.5.2 y actualizar SHA, notas y JSON'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Actualizar las Release Notes visibles en GitHub
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release edit v1.5.2 --repo "$GITHUB_REPOSITORY" --notes-file "$RUNNER_TEMP/live_notes.md"
+          gh api "repos/$GITHUB_REPOSITORY/releases/tags/v1.5.2" --jq '.body' | grep -F "$EXPECTED_SHA256"
+          gh api "repos/$GITHUB_REPOSITORY/contents/nodopin/version.json" --jq '.content' | base64 -d | grep -F "$EXPECTED_SHA256"
+          echo "v1.5.2: SHA y JSON confirmados en GitHub"
