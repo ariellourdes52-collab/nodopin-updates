@@ -1,7 +1,7 @@
 {
-  "versionCode": 69,
-  "versionName": "1.5.3",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.3/nodopin.apk",
-  "sha256": "25598ba7cebbdcab7c333ced0c386ad3d1b90499407c2dc4e2f117df4a4a5142",
-  "changelog": "Seguridad BLE reforzada: HELLO no elimina alertas de identidad, comprobación E2EE opcional y prevención de respuestas reutilizadas. Se conservan Wi-Fi Direct, NLDR1, notificaciones FCM, grupos, P1/P2 y App Check."
+  "versionCode": 70,
+  "versionName": "1.5.4",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.4/nodopin.apk",
+  "sha256": "c0fb13397783e11d0aa3b6ffc5bfc5833e1f514dd2642788ce813334160cbfe2",
+  "changelog": "Editor Material 3 renovado y unificado en chats privados y grupos, barra más cercana al teclado y multimedia privada con duraciones de 30 s, 1, 5 y 15 minutos; se conservan las opciones anteriores, E2EE/NLDR1, BLE, Wi-Fi Direct, FCM, P1/P2, App Check y copias integrales."
 }
