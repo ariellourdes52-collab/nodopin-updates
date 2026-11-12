@@ -1,0 +1,42 @@
+name: NodoPin — preparar borrador v1.5.5 (71)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v1.5.5.md'
+      - '.github/workflows/prepare-nodopin-v1.5.5-draft.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nodopin-v1.5.5-draft
+  cancel-in-progress: false
+
+jobs:
+  prepare-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Crear borrador GitHub, sin publicación ni actualizador
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if gh release view v1.5.5 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "La release v1.5.5 ya existe: no se modifica ni se publica."
+            exit 0
+          fi
+          gh release create v1.5.5 \
+            --repo "$GITHUB_REPOSITORY" \
+            --target main \
+            --draft \
+            --title "🌍 NodoPin v1.5.5 (71) — Español e inglés" \
+            --notes-file releases/v1.5.5.md
+          gh release view v1.5.5 --repo "$GITHUB_REPOSITORY" --json isDraft,tagName,name \
+            --jq '{isDraft,tagName,name}'
+          echo "Borrador generado. No adjunta APK, no publica ni modifica nodopin/version.json."
