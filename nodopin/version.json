@@ -1,7 +1,7 @@
 {
-  "versionCode": 70,
-  "versionName": "1.5.4",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.4/nodopin.apk",
-  "sha256": "c0fb13397783e11d0aa3b6ffc5bfc5833e1f514dd2642788ce813334160cbfe2",
-  "changelog": "Editor Material 3 renovado y unificado en chats privados y grupos, barra más cercana al teclado y multimedia privada con duraciones de 30 s, 1, 5 y 15 minutos; se conservan las opciones anteriores, E2EE/NLDR1, BLE, Wi-Fi Direct, FCM, P1/P2, App Check y copias integrales."
+  "versionCode": 71,
+  "versionName": "1.5.5",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.5/nodopin.apk",
+  "sha256": "7c6bc515ca314d70ea9cd7e86cf852ae06f8c0979f5a89ce34034c83584f3b29",
+  "changelog": "NodoPin ahora disponible en español e inglés, con detección automática del idioma del dispositivo y selector manual en Ajustes. Traducción completa de chats privados, grupos, multimedia, contactos, QR/NFC, inicio guiado, SOS, notificaciones, Bluetooth, Wi-Fi Direct, seguridad, copias, avisos y Centro DR (DR Calendar en inglés). Se preservan E2EE, App Check, FCM y las funciones existentes."
 }
