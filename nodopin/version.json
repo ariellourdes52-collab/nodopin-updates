@@ -1,7 +1,7 @@
 {
-  "versionCode": 71,
-  "versionName": "1.5.5",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.5/nodopin.apk",
-  "sha256": "7c6bc515ca314d70ea9cd7e86cf852ae06f8c0979f5a89ce34034c83584f3b29",
-  "changelog": "NodoPin ahora disponible en español e inglés, con detección automática del idioma del dispositivo y selector manual en Ajustes. Traducción completa de chats privados, grupos, multimedia, contactos, QR/NFC, inicio guiado, SOS, notificaciones, Bluetooth, Wi-Fi Direct, seguridad, copias, avisos y Centro DR (DR Calendar en inglés). Se preservan E2EE, App Check, FCM y las funciones existentes."
+  "versionCode": 72,
+  "versionName": "1.5.6",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.6/nodopin.apk",
+  "sha256": "2c65f8c29cb9f2b885fafd9a7ed2033d40412462b10977eda7b891beb7c932d9",
+  "changelog": "Tor integrado con transporte protegido para las rutas compatibles y experiencia unificada de identidad entre Normal y Tor. Mejoras de recuperación de identidad y PIN, copias locales cifradas con programación cada 24 horas, restauración de contactos y fotografías, protección de capturas y vistas sensibles, controles de seguridad local, indicadores de disponibilidad de SOS/Radar/Agenda en Tor y donaciones voluntarias mediante Fourthwall. Se conserva la interfaz en español e inglés, E2EE, chats privados y grupos, multimedia, notas de voz, QR/NFC, BLE y Wi-Fi Direct. APK universal optimizado para ARM64, ARM32, x86 y x86_64."
 }
