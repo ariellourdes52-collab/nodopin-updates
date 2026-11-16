@@ -1,7 +1,7 @@
 {
-  "versionCode": 72,
-  "versionName": "1.5.6",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.6/nodopin.apk",
-  "sha256": "2c65f8c29cb9f2b885fafd9a7ed2033d40412462b10977eda7b891beb7c932d9",
-  "changelog": "Tor integrado con transporte protegido para las rutas compatibles y experiencia unificada de identidad entre Normal y Tor. Mejoras de recuperación de identidad y PIN, copias locales cifradas con programación cada 24 horas, restauración de contactos y fotografías, protección de capturas y vistas sensibles, controles de seguridad local, indicadores de disponibilidad de SOS/Radar/Agenda en Tor y donaciones voluntarias mediante Fourthwall. Se conserva la interfaz en español e inglés, E2EE, chats privados y grupos, multimedia, notas de voz, QR/NFC, BLE y Wi-Fi Direct. APK universal optimizado para ARM64, ARM32, x86 y x86_64."
+  "versionCode": 73,
+  "versionName": "1.5.7",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.7/nodopin.apk",
+  "sha256": "afa9c9cc8814a9d88b410b5bfe6f6f3ebbfa7e6036e1a4df2100215d7a05e39e",
+  "changelog": "Nuevo en v1.5.7: PBKDF2-HMAC-SHA256 de 600.000 iteraciones en las cuatro rutas criptográficas verificadas; nuevas copias NPBK2 v02 y restauración comprobada; interoperabilidad de copias y recuperación integral con NodoPin WebApp actualizada. Las copias NPBK2 v01 antiguas no son restaurables en 1.5.7. Se mantienen todas las funciones de 1.5.6: Tor integrado con transporte protegido para las rutas compatibles y experiencia unificada de identidad entre Normal y Tor. Mejoras de recuperación de identidad y PIN, copias locales cifradas con programación cada 24 horas, restauración de contactos y fotografías, protección de capturas y vistas sensibles, controles de seguridad local, indicadores de disponibilidad de SOS/Radar/Agenda en Tor y donaciones voluntarias mediante Fourthwall. Se conserva la interfaz en español e inglés, E2EE, chats privados y grupos, multimedia, notas de voz, QR/NFC, BLE y Wi-Fi Direct. APK universal optimizado para ARM64, ARM32, x86 y x86_64."
 }
