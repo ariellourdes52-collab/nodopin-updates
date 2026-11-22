@@ -1,7 +1,7 @@
 {
-  "versionCode": 73,
-  "versionName": "1.5.7",
-  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.7/nodopin.apk",
-  "sha256": "afa9c9cc8814a9d88b410b5bfe6f6f3ebbfa7e6036e1a4df2100215d7a05e39e",
-  "changelog": "Nuevo en v1.5.7: PBKDF2-HMAC-SHA256 de 600.000 iteraciones en las cuatro rutas criptográficas verificadas; nuevas copias NPBK2 v02 y restauración comprobada; interoperabilidad de copias y recuperación integral con NodoPin WebApp actualizada. Las copias NPBK2 v01 antiguas no son restaurables en 1.5.7. Se mantienen todas las funciones de 1.5.6: Tor integrado con transporte protegido para las rutas compatibles y experiencia unificada de identidad entre Normal y Tor. Mejoras de recuperación de identidad y PIN, copias locales cifradas con programación cada 24 horas, restauración de contactos y fotografías, protección de capturas y vistas sensibles, controles de seguridad local, indicadores de disponibilidad de SOS/Radar/Agenda en Tor y donaciones voluntarias mediante Fourthwall. Se conserva la interfaz en español e inglés, E2EE, chats privados y grupos, multimedia, notas de voz, QR/NFC, BLE y Wi-Fi Direct. APK universal optimizado para ARM64, ARM32, x86 y x86_64."
+  "versionCode": 76,
+  "versionName": "1.5.8",
+  "downloadUrl": "https://github.com/ariellourdes52-collab/nodopin-updates/releases/download/v1.5.8/nodopin.apk",
+  "sha256": "ce3be50f7dd71024cfb2b420e170a669e6a2e16c15b20d42324418309634e586",
+  "changelog": "NodoPin v1.5.8 (76): inicio Normal/Tor más claro con identidad única, mismo PIN y conversaciones compatibles; controles independientes de servicios de Google y protección de capturas; mejoras de continuidad de Tor integrado y compatibilidad con Android; mantenimiento de SMS SOS y del actualizador propio de la edición GitHub. APK universal optimizado con firma conservada y componentes ARM64, ARM32, x86 y x86_64; la biblioteca Tor no está presente para x86 de 32 bits. Se conservan E2EE, chats privados y grupos, multimedia y notas de voz, QR/NFC, BLE/Wi-Fi Direct, SOS/Radar/Agenda, copias locales y Google compatibles, donaciones opcionales y compatibilidad de copias cifradas NPBK2 v02 con derivación PBKDF2 de 600.000 iteraciones. Las copias NPBK2 v01 antiguas no se restauran. V4 multidispositivo no está activado."
 }
